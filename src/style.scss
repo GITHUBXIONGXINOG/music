@@ -1,0 +1,224 @@
+//reset
+body{
+  margin: 0;
+}
+ul{
+  margin: 0;
+  padding: 0;
+}
+*{
+  box-sizing: border-box;
+  outline: none;
+}
+li{
+  list-style-type: none;
+}
+a{
+  text-decoration: none;
+}
+
+html {
+  font-size: 14px;
+}
+
+//bg text:color
+//定义颜色变量 scss变量以$开头
+$color:(
+  'primary':#1a73e8,
+  'black':black,
+  'white':white,
+  'gray1':#fafafa,
+  'gray2':rgba(26,26,27,0.5)
+);
+
+.w100{
+  width: 100%;
+}
+
+//@each是循环语句 定义循环
+//变量需要镶嵌在字符串之中，就必须需要写在#{}之中
+@each $key,$value in $color{
+  // .text-primary:1a73e8
+  .text-#{$key}{
+    color:$value;
+  }
+  .bg-#{$key}{
+    color: $value;
+  }
+}
+
+//text layout 文本对齐方式
+@each $val in (left,center,right){
+  .text-#{$val} {
+    text-align: $val;
+  }
+}
+
+//flex 设置弹性盒
+.d-flex{
+  display: flex;
+}
+//flex-grow 属性用于设置或检索弹性盒子的扩展比率。。
+//flex-grow:1 表示扩展比例为1
+.flex-grow-1{
+  flex-grow: 1;
+}
+.flex-1{
+  flex: 1;
+}
+//flex-wrap 属性规定flex容器是单行或者多行
+//wrap 规定灵活的项目在必要的时候拆行或拆列。
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+//jc-center
+$flex-js:(
+  'start': flex-start,//	默认值。项目位于容器的开头。
+  'end': flex-end,//项目位于容器的结尾。
+  'center': center,//项目位于容器的中心。
+  between: space-between,//项目位于各行之间留有空白的容器内
+  around: space-around//项目位于各行之前、之间、之后都留有空白的容器内。
+);
+//justify-content 用于设置或检索弹性盒子元素在主轴（横轴）方向上的对齐方式。
+@each $jcKey,$jcVal in $flex-js {
+  .jc-#{$jcKey}{
+    justify-content: $jcVal;
+  }
+}
+
+//ai-center
+$flex-ai:(
+  start: flex-start,
+  end: flex-end,
+  center: center
+);
+//align-items 属性定义flex子项在flex容器的当前行的侧轴（纵轴）方向上的对齐方式。
+@each $aiKey,$aiVal in $flex-ai {
+  .jc-#{$aiKey}{
+    align-items: $aiVal;
+  }
+}
+
+//text size
+$text-size-base: 1rem;
+$text-size:(
+  xs: 0.8571,
+  sm: 1,
+  md: 1.1429,
+  lg: 1.4286
+);
+@each $key,$val in $text-size{
+  .text-#{$key}{
+      font-size: $val * $text-size-base;
+  }
+}
+
+//margin padding
+$spacing-types: (m:margin, p:padding);
+$spacing-directions:(
+        t: top,
+        r: right,
+        b: bottom,
+        l: left
+);
+$spacing-sizes: (
+        0: 0,
+        1: 0.25,
+        2: 0.5,
+        3: 1,
+        4: 1.5,
+        5: 3
+);
+$spacing-size-base: 1rem;
+
+@each $typeKey, $typeVal in $spacing-types {
+  @each $directionKey, $directionVal in $spacing-directions {
+    @each $sizeKey, $sizeVal in $spacing-sizes {
+      //mt-0 0rem
+      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+        #{$typeVal}-#{$directionVal}: $sizeVal * $spacing-size-base;
+      }
+    }
+  }
+
+  @each $sizeKey, $sizeVal in $spacing-sizes {
+    //mx-0 0rem
+    .#{$typeKey}x-#{$sizeKey} {
+      #{$typeVal}-left: $sizeVal * $spacing-size-base;
+      #{$typeVal}-right: $sizeVal * $spacing-size-base;
+    }
+    //my-0 0rem
+    .#{$typeKey}y-#{$sizeKey} {
+      #{$typeVal}-top: $sizeVal * $spacing-size-base;
+      #{$typeVal}-bottom: $sizeVal * $spacing-size-base;
+    }
+    //-0 0rem
+    .#{$typeKey}-#{$sizeKey} {
+      #{$typeVal}: $sizeVal * $spacing-size-base;
+    }
+  }
+}
+
+//text weight
+$text-weight: (
+        1: 100,
+        2: 200,
+        3: 300,
+        4: 400,
+        5: 500,
+        6: 600,
+        7: 700,
+        8: 800,
+        9: 900
+);
+@each $key, $val in $text-weight {
+  .text-weight-#{$key} {
+    font-weight: $val;
+  }
+}
+
+//position
+.pos-a {
+  position: absolute;
+}
+.pos-r {
+  position: relative;
+}
+$pos-sizes: (
+        0: 0,
+        1: 0.25,
+        2: 0.5,
+        3: 1,
+        4: 1.5,
+        5: 3
+);
+$pos-size-base: 1rem;
+@each $directionVal in (left, top, right, bottom) {
+  @each $sizeKey, $sizeVal in $pos-sizes {
+    //t-1: top: 0.25rem;
+    .#{$directionVal}-#{$sizeKey} {
+      #{$directionVal}: $sizeVal * $pos-size-base;
+    }
+  }
+}
+
+//nav active
+.nav-active {
+  color: #1a73e8;
+  font-weight: 700;
+}
+
+//singer active
+.singer-active {
+  color: white;
+  background-color: #1a73e8;
+  border-radius: 0.6rem;
+}
+
+//shadow
+.shadow {
+  box-shadow: 1px 1px 10px #ccc;
+}
+
+
