@@ -2,7 +2,7 @@
     <div class="my-swiper">
 <!--        v-if="swiperList.length"条件判断 当获取到数据后才会进行轮播-->
         <swiper ref="mySwiper" :options="swiperOptions" v-if="swiperList.length">
-            <swiper-slide v-for="(item,index) of swiperList" :key="item">
+            <swiper-slide v-for="(item,index) of swiperList" :key="item.id">
 <!--                 冒号 v-bind -->
                 <img :src="item.img" class="w100">
             </swiper-slide>

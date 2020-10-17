@@ -88,14 +88,14 @@ $flex-js:(
 }
 
 //ai-center
-$flex-ai:(
-  start: flex-start,
-  end: flex-end,
-  center: center
+$flex-ai: (
+        start: flex-start,
+        end: flex-end,
+        center: center
 );
 //align-items 属性定义flex子项在flex容器的当前行的侧轴（纵轴）方向上的对齐方式。
-@each $aiKey,$aiVal in $flex-ai {
-  .jc-#{$aiKey}{
+@each $aiKey, $aiVal in $flex-ai {
+  .ai-#{$aiKey} {
     align-items: $aiVal;
   }
 }
