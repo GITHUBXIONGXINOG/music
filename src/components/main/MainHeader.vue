@@ -6,7 +6,7 @@
         </div>
 <!--          首页列表-->
         <div class="nav-list">
-            <ul class="d-flex jc-around pt-3 text-weight-7 text-gray2">
+            <ul class="d-flex jc-around py-3 text-weight-7 text-gray2">
 <!--                加了key(一定要具有唯一性) id的选择跟内容进行了一个关联
                     :class 给循环内添加活动样式
                     nav-active 就表示点击到,图标颜色改变

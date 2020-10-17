@@ -1,7 +1,15 @@
 <template>
     <div class="recommend">
 <!--       使用组件-->
-        <my-swiper></my-swiper>
+<!--            冒号“：”是v-bind的缩写
+           父组件传值给my-swiper子组件 参数在父组件 传给子组件
+-->
+        <my-swiper :swiper-list="swiperList"
+                   :swiper-options="swiperOptions"
+        >
+
+
+        </my-swiper>
     </div>
 </template>
 
@@ -9,17 +17,30 @@
   import MySwiper from '@/components/main/recommend/MySwiper'
   import axios from 'axios'
   export default {
+      data(){
+          return {
+              swiperList:[],
+              swiperOptions: {
+                  pagination: {
+                      el: '.swiper-pagination'
+                  },
+                  loop:true,
+                  autoplay:true
+              }
+          }
+      },
       methods:{
-        // async fetchSwiperList(){
-        //
-        //     const res = await this.$http.get('/recommend/banner');
-        //
-        // }
+
       },
       created() {
-          // this.fetchSwiperList()
           axios.get('/api/recommend/banner').then(res=>{
-              console.log(res)
+                // console.log(res)
+              //res 获取到的连接
+              //data 连接里的数据保存在data里面
+              // this.swiperList = res.data.data.map(item => ({img:item.picUrl}))
+              this.swiperList = res.data.data.map(item => ({img: item.picUrl}))
+              // console.log(this.swiperList.map(item => item.img))
+
           })
       },
       //注册组件

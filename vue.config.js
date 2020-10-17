@@ -1,7 +1,7 @@
 
 
 module.exports = {
-  //基本路径
+  //基本路径,设置为 ./ 才能在构建后相关资源路径不会报错
 
   publicPath: './',
 
@@ -33,7 +33,7 @@ module.exports = {
 
   productionSourceMap: false,
 
-    
+
 
   // webpack-dev-server 相关配置 https://webpack.js.org/configuration/dev-server/
 
