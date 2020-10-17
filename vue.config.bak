@@ -33,7 +33,28 @@ module.exports = {
 
   productionSourceMap: false,
 
-    
+  // webpack配置
+
+  //对内部的 webpack 配置进行更细粒度的修改 https://github.com/neutrinojs/webpack-chain see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
+
+  chainWebpack: config => {
+    /**
+
+     * 删除懒加载模块的prefetch，降低带宽压力
+
+     * https://cli.vuejs.org/zh/guide/html-and-static-assets.html#prefetch
+
+     * 而且预渲染时生成的prefetch标签是modern版本的，低版本浏览器是不需要的
+
+     */
+
+
+
+  },
+
+
+
+
 
   // webpack-dev-server 相关配置 https://webpack.js.org/configuration/dev-server/
 
@@ -51,9 +72,9 @@ module.exports = {
     hotOnly: true, // 热更新
 
     proxy:{
-      '/api':{ //匹配 /api
-        target:'https://api.qq.jsososo.com', //匹配 /api 后转换的地址
-        pathRewrite:{ //重写,把之前的清空
+      '/api':{
+        target:'https://api.qq.jsososo.com',
+        pathRewrite:{
           '^/api':''
         },
         changeOrigin: true

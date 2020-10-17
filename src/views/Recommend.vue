@@ -7,17 +7,20 @@
 
 <script type="text/javascript">
   import MySwiper from '@/components/main/recommend/MySwiper'
+  import axios from 'axios'
   export default {
       methods:{
-        async fetchSwiperList(){
-            // const res = await this.$http.get('/recommend/banner')
-            // console.log(res.data)
-            const res = await this.$http.get('/recommend/banner');
-            this.swiperList = res.data.data.map(item => ({img: item.pic_info.url}))
-        }
+        // async fetchSwiperList(){
+        //
+        //     const res = await this.$http.get('/recommend/banner');
+        //
+        // }
       },
       created() {
-          this.fetchSwiperList()
+          // this.fetchSwiperList()
+          axios.get('/api/recommend/banner').then(res=>{
+              console.log(res)
+          })
       },
       //注册组件
       components:{
