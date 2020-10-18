@@ -1,23 +1,34 @@
 <template>
     <div class="recommend">
-<!--       使用组件-->
-<!--            冒号“：”是v-bind的缩写
-           父组件传值给my-swiper子组件 参数在父组件 传给子组件
--->
-        <my-swiper :swiper-list="swiperList"
-                   :swiper-options="swiperOptions"
-        />
-<!--        通过v-bind 传递数据给子组件SongSheetList-->
-        <song-sheet-list
-                :hot-song="hotSong"
+<!--        使用scroll 滚动组件-->
+<!--        通过v-bind绑定属性,传递数据给子组件-->
+<!--        这里通过top传递顶部的距离-->
+        <scroll :top="76" :list="hotSong" ref="scroll">
+<!--            滚动样式只能应用到一个,用div包裹-->
+            <div class="scroll-wrapper">
+                <!--       使用组件-->
+                <!--            冒号“：”是v-bind的缩写
+                           父组件传值给my-swiper子组件 参数在父组件 传给子组件
+                           @ 是v-on的缩写 用于绑定事件
+                -->
+                <my-swiper :swiper-list="swiperList"
+                           :swiper-options="swiperOptions"
+                           @img-load="scrollRefresh"
+                />
+                <!--        通过v-bind 传递数据给子组件SongSheetList-->
+                <song-sheet-list
+                        :hot-song="hotSong"
 
-        />
+                />
+            </div>
+        </scroll>
     </div>
 </template>
 
 <script type="text/javascript">
   import MySwiper from '@/components/main/recommend/MySwiper'
   import SongSheetList from '@/components/main/recommend/SongSheetList'
+  import Scroll from "@/components/commond/Scroll";
   import axios from 'axios'
   export default {
       data(){
@@ -35,7 +46,10 @@
           }
       },
       methods:{
-
+          scrollRefresh(){
+                //通过refs定位到scroll,然后调用scroll里面的refresh()更新滑动组件高度
+                this.$refs.scroll.refresh()
+            }
       },
       //created ：处于loading结束后，还做一些初始化，实现函数自执行（data数据已经初始化，但是DOM结构渲染完成，组件没有加载）
       created() {
@@ -49,7 +63,7 @@
           });
 
           axios.get('/api/recommend/playlist').then(res =>{
-              console.log(res)
+              // console.log(res)
               this.hotSong =  res.data.data.list.map(item =>({
                   id: item.access_num,
                   img: item.cover_url_medium,
@@ -61,6 +75,7 @@
       },
       //注册组件
       components:{
+          Scroll,
           MySwiper,
           SongSheetList
       }

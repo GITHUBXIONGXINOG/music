@@ -18,6 +18,7 @@
 </template>
 
 <script type="text/javascript">
+
     export default {
       //props 定义接收属性
         props:{

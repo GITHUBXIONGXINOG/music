@@ -4,7 +4,7 @@
         <swiper ref="mySwiper" :options="swiperOptions" v-if="swiperList.length">
             <swiper-slide v-for="(item,index) of swiperList" :key="item.id">
 <!--                 冒号 v-bind -->
-                <img :src="item.img" class="w100">
+                <img :src="item.img" class="w100" @load="imgLoad">
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -31,6 +31,12 @@ import 'swiper/css/swiper.css'
             required: true
         }
     },
+      methods:{
+        imgLoad(){
+            //$emit 通过触发自定义事件，来给触发监听事件
+            this.$emit('img-load')
+        }
+      },
       components: {
           Swiper,
           SwiperSlide
