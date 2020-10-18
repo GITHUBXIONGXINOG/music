@@ -10,6 +10,7 @@
                 <!--            冒号“：”是v-bind的缩写
                            父组件传值给my-swiper子组件 参数在父组件 传给子组件
                            @ 是v-on的缩写 用于绑定事件
+                           @img-load由子组件MySwiper触发,触发后执行scrollRefresh更新滑动组件高度
                 -->
                 <my-swiper :swiper-list="swiperList"
                            :swiper-options="swiperOptions"

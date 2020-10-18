@@ -3,7 +3,10 @@
 <!--        v-if="swiperList.length"条件判断 当获取到数据后才会进行轮播-->
         <swiper ref="mySwiper" :options="swiperOptions" v-if="swiperList.length">
             <swiper-slide v-for="(item,index) of swiperList" :key="item.id">
-<!--                 冒号 v-bind -->
+<!--                 冒号 v-bind 指令用于设置HTML属性
+                     @   v-on 指令用于绑定HTML事件
+                     图片加载完后使用@load 绑定自定义imgLoad事件
+-->
                 <img :src="item.img" class="w100" @load="imgLoad">
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
@@ -34,6 +37,7 @@ import 'swiper/css/swiper.css'
       methods:{
         imgLoad(){
             //$emit 通过触发自定义事件，来给触发监听事件
+            //这里图片加载完成后,会触发Recommend里面的img-load事件
             this.$emit('img-load')
         }
       },
