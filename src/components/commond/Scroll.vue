@@ -23,12 +23,18 @@ import BScroll from '@better-scroll/core'
       list:{
           type:Array,
           required:true
-      }
+      },
+        click:{
+          type:Boolean,
+          default: true
+        }
     },
     methods:{
         initScroll(){
             this.$refs.wrapper.style.top=this.top+'px'
-            this.scroll = new BScroll(this.$refs.wrapper)
+            this.scroll = new BScroll(this.$refs.wrapper,{
+                click:this.click
+            })
         },
         //定义刷新子组件高度的方法,用于其它组件调用
         refresh(){

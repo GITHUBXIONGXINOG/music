@@ -1,6 +1,6 @@
 <template>
     <div class="main-header">
-        <div class="title text-primary text-lg text-weight-7 text-center">
+        <div class="title text-primary text-lg text-weight-7 text-center pt-2">
     <!--双花括号:执行表达式,将表达式的结果 输出到当前调用的元素的innerHTML中-->
             {{title}}
         </div>

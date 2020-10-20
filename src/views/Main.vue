@@ -7,7 +7,10 @@
                 title='Function Music'
                 @nav-click="toPath"
        />
-         <router-view></router-view>
+<!--        子路由(推荐 歌手 排行 搜索)-->
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
 
 
 

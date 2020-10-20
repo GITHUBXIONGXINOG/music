@@ -7,13 +7,9 @@
                     :key="category.id"
                     class="p-1 m-2"
                     :class="{'singer-active':activeIndex[key]===index}"
-                    @click="activeIndex[key]=index"
-
+                    @click="categoryClick(key,index)"
                 >
                     {{category.name}}
-
-
-
                 </li>
             </ul>
 
@@ -39,11 +35,25 @@ export default {
                 index:0,
                 sex:0
             },
-
         }
     },
-    created() {
+    methods:{
+        //点击时,不止样式发生变化,而且要派发事件给父组件,告诉父组件数据需要重新获取
+        categoryClick(key,index){
+            this.activeIndex[key]=index
+            const params = {}
+            for (let key in this.activeIndex){
+                params[key] = this.singerCategory[key][this.activeIndex[key]].id
+            }
+            console.log(params)
+            //派发事件,并把对应的活动index也派发出去
+            // this.$emit('category-click',)
 
+        },
+
+    },
+    created() {
+        console.log(this.singerCategory )
 
     },
     watch:{
