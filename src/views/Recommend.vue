@@ -50,10 +50,16 @@
           scrollRefresh(){
                 //通过refs定位到scroll,然后调用scroll里面的refresh()更新滑动组件高度
                 this.$refs.scroll.refresh()
-            }
+            },
+          // async fetchSwiperList(){
+          //     const res = await this.$http.get('/api/recommend/banner')
+          //     console.log(res.data)
+          // }
+
       },
       //created ：处于loading结束后，还做一些初始化，实现函数自执行（data数据已经初始化，但是DOM结构渲染完成，组件没有加载）
       created() {
+          // this.fetchSwiperList();
           //then()方法是异步执行,当.then()前的方法执行完后再执行then()内部的程序，这样就避免了数据没获取到的问题。
           axios.get('/api/recommend/banner').then(res=>{
               // console.log(res)

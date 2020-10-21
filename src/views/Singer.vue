@@ -10,16 +10,18 @@
 <!--        ref 添加引用,这里使用后会自动在this.$refs上添加scroll  -->
        <scroll :list="singerList" :top="83" ref="scroll">
            <div class="scroll-wrapper">
-               <!--        歌手分类-->
+               <!--        歌手分类   @category-click="fetchSingerList()"-->
                <singer-category
                        :singer-category="singerCategory"
                        v-if="DestroyIncomeStatistics == true"
+                        @category-click="fetchSingerList"
                />
                <!--        歌手列表
                            通过v-bind将歌手列表数据派发给子组件singer-list
                -->
                <singer-list
                        :list="singerList"
+                       @category-click="fetchSingerList"
                />
            </div>
        </scroll>
@@ -46,12 +48,24 @@ import axios from 'axios'
              singerList:[]
          }
      },
+
       methods:{
+         //
+            async fetchSingerList(params){
+                //每次选择时都要 清空一次
+                this.singerList = []
+                const res = await this.$http.get('/singer/list',{
+                    params
+                })
+                this.singerList = res.data.data.list
+            }
 
       },
       //vue生命周期
       // created ：处于loading结束后，还做一些初始化，实现函数自执行
       created() {
+         //在loading结束后,调用歌手列表参数fetchSingerList
+         this.fetchSingerList()
          //该子组件更新变量默认为false
          this.DestroyIncomeStatistics = false;
         // 获取歌手分类
@@ -81,11 +95,13 @@ import axios from 'axios'
         })
 
       //    获取歌手列表
-          axios.get('/api/singer/list').then(res=>{
-              // console.log(res.data)
-              this.singerList=res.data.data.list
-              // console.log( this.singerList)
-          })
+      //   axios.get('/api/singer/list').then(res=>{
+      //         // console.log(res.data)
+      //         this.singerList=res.data.data.list
+      //         // console.log( this.singerList)
+      //     })
+
+
       },
       //注册组件
       components:{

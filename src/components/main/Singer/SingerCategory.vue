@@ -41,19 +41,21 @@ export default {
         //点击时,不止样式发生变化,而且要派发事件给父组件,告诉父组件数据需要重新获取
         categoryClick(key,index){
             this.activeIndex[key]=index
+            //params保存点击的类别id
             const params = {}
             for (let key in this.activeIndex){
                 params[key] = this.singerCategory[key][this.activeIndex[key]].id
             }
-            console.log(params)
+            // console.log(params)
             //派发事件,并把对应的活动index也派发出去
-            // this.$emit('category-click',)
+            //子组件使用 $emit 触发父组件的自定义事件category-click,并传递params
+            this.$emit('category-click',params)
 
         },
 
     },
     created() {
-        console.log(this.singerCategory )
+        // console.log(this.singerCategory )
 
     },
     watch:{

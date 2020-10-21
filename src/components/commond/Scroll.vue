@@ -20,6 +20,7 @@ import BScroll from '@better-scroll/core'
           type:Number,
           default:0
       },
+
       list:{
           type:Array,
           required:true
